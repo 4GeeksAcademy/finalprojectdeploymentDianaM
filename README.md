@@ -8,13 +8,15 @@ Within each food class (at least in the first food classes to be analyzed-deploy
 
 Starting by bread, we have trained a first version of the model aimed at distinguishing what is bread of what is not. After + 10 trainning rounds epochs (+500 epochs) training Ultralytics Yolon9.pt model pre-traiend with LVIS dataset (where bread is a class and there are + 18 not bread pastry classes) with pretty good numerical metrics (MMMMETRICAS), but failing badly in the single image test prediction ([1st Yolon9.pt model converted to onnx in order to be deployed in a public STREAMLIT app](https://gourmetfoodclassifierv12.streamlit.app/)), we have trained OPEN AI CLIP model using 2 class prompts with quite better metrics in just the 1s training round (EVALUACIÓN Y METRICASSSS CLIP)
 
-
+![Alt text](src/static/gourmetfoodclassifierv12.png)
 
 ## Global Ppoject Structure
 
 # Image classification Flask App deployed using a temporary port url set up as public because of incompatibilities with Torch & Transformers libraries and Render that didn't allow to deploy the app using a permanent url
 * [Github Repository (/images folder ignored because it surpases github repo max storage with +20.000 images)](https://github.com/dianamonroe/pretrainfoodclassificationwidget)
 * [Temporary public bread classification and taggin app (for chefs)](https://5000-dianamonroe-pretrainfoo-2w8tlujr98p.ws-eu117.gitpod.io/)
+![Alt text](src/static/4Geek Final Project Deployment - OPEN AI CLIP MODEL - Bread - not bread Classifier.png)
+
 
 
 # Current repos¡itory -bread - not bread classifier model- structure (using the same system - Flask app deployed in a temporary port url because of Torch and Transformers non compatibility with Rendr)
