@@ -1,63 +1,62 @@
 import os
 from flask import Flask, render_template, request, jsonify
 from PIL import Image
-import torch
-from transformers import CLIPProcessor, CLIPModel
 import io
 import numpy as np
 from dotenv import load_dotenv
 
-load_dotenv()  # Load environment variables from .env file
+load_dotenv()
 
 app = Flask(__name__)
 
 # Set confidence threshold for classification
 CONFIDENCE_THRESHOLD = float(os.getenv('CONFIDENCE_THRESHOLD', '0.25'))
 
-def load_model():
-    try:
-        # Load CLIP model and processor
-        model = CLIPModel.from_pretrained("openai/clip-vit-base-patch32")
-        processor = CLIPProcessor.from_pretrained("openai/clip-vit-base-patch32")
-        
-        # Load learned prompts
-        learned_prompts = torch.load(os.getenv('LEARNED_PROMPTS_PATH', 'src/models/learned_prompts.pt'), map_location=torch.device('cpu'))
-        
-        return model, processor, learned_prompts
-    except Exception as e:
-        print(f"Failed to load model components: {e}")
-        return None, None, None
+try:
+    import torch
+    from transformers import CLIPProcessor, CLIPModel
 
-model, processor, learned_prompts = load_model()
+    def load_model():
+        try:
+            model = CLIPModel.from_pretrained("openai/clip-vit-base-patch32")
+            processor = CLIPProcessor.from_pretrained("openai/clip-vit-base-patch32")
+            learned_prompts = torch.load(os.getenv('LEARNED_PROMPTS_PATH', 'src/models/learned_prompts.pt'), map_location=torch.device('cpu'))
+            return model, processor, learned_prompts
+        except Exception as e:
+            print(f"Failed to load model components: {e}")
+            return None, None, None
 
-def classify_image(image, model, processor, learned_prompts):
-    try:
-        # Preprocess the image
-        inputs = processor(images=image, return_tensors="pt", padding=True)
-        
-        # Get image features
-        with torch.no_grad():
-            image_features = model.get_image_features(**inputs)
-        
-        # Compute similarities
-        similarities = torch.matmul(image_features, learned_prompts.t())
-        probabilities = torch.nn.functional.softmax(similarities, dim=1)
-        
-        confidence, class_id = torch.max(probabilities, dim=1)
-        confidence = confidence.item()
-        class_id = class_id.item()
+    model, processor, learned_prompts = load_model()
 
-        if confidence > CONFIDENCE_THRESHOLD:
-            if class_id == 0:
-                result = f"Cool! I'm pretty sure (confidence {confidence * 100:.2f}%) this is bread"
+    def classify_image(image, model, processor, learned_prompts):
+        try:
+            inputs = processor(images=image, return_tensors="pt", padding=True)
+            with torch.no_grad():
+                image_features = model.get_image_features(**inputs)
+            similarities = torch.matmul(image_features, learned_prompts.t())
+            probabilities = torch.nn.functional.softmax(similarities, dim=1)
+            confidence, class_id = torch.max(probabilities, dim=1)
+            confidence = confidence.item()
+            class_id = class_id.item()
+
+            if confidence > CONFIDENCE_THRESHOLD:
+                if class_id == 0:
+                    result = f"Cool! I'm pretty sure (confidence {confidence * 100:.2f}%) this is bread"
+                else:
+                    result = f"This image doesn't appear bread to me (confidence: {confidence * 100:.2f}%)"
             else:
-                result = f"This image doesn't appear bread to me (confidence: {confidence * 100:.2f}%)"
-        else:
-            result = f"I'm not confident enough to classify this image (confidence: {confidence * 100:.2f}%)"
+                result = f"I'm not confident enough to classify this image (confidence: {confidence * 100:.2f}%)"
 
-        return result
-    except Exception as e:
-        return f"Error during classification: {str(e)}"
+            return result
+        except Exception as e:
+            return f"Error during classification: {str(e)}"
+
+except ImportError:
+    print("Warning: Unable to import torch or transformers. Running in limited mode.")
+    model, processor, learned_prompts = None, None, None
+
+    def classify_image(image, model, processor, learned_prompts):
+        return "Classification is currently unavailable."
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -68,17 +67,14 @@ def index():
         if file.filename == '':
             return jsonify({'error': 'No selected file'})
         if file:
-            # Read the file into bytes
             image_bytes = file.read()
-            
-            # Open the image using PIL
             image = Image.open(io.BytesIO(image_bytes)).convert("RGB")
             
             if model and processor and learned_prompts is not None:
                 result = classify_image(image, model, processor, learned_prompts)
                 return jsonify({'result': result})
             else:
-                return jsonify({'error': 'Failed to load model.'})
+                return jsonify({'error': 'Model not available. Please check server logs.'})
     return render_template('index.html')
 
 if __name__ == '__main__':
