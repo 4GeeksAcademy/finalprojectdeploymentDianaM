@@ -67,24 +67,27 @@
         }
 
         function handleFiles(files) {
-            if (files.length) {
-                const file = files[0];
-                displayImage(file);
-                fileInput.files = files;
-            }
-        }
+    if (files.length) {
+        const file = files[0];
+        displayImage(file);
+        fileInput.files = files;
+        // Clear the classification result
+        document.getElementById('result').textContent = '';
+        document.querySelector('.tagging-container').style.display = 'none';
+    }
+}
 
-        function displayImage(file) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const img = document.createElement('img');
-                img.src = e.target.result;
-                img.id = 'currentImage';
-                dropArea.innerHTML = '';
-                dropArea.appendChild(img);
-            }
-            reader.readAsDataURL(file);
-        }
+function displayImage(file) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        const img = document.createElement('img');
+        img.src = e.target.result;
+        img.id = 'currentImage';
+        dropArea.innerHTML = '';
+        dropArea.appendChild(img);
+    }
+    reader.readAsDataURL(file);
+}
 
         fileInput.addEventListener('change', function(e) {
             handleFiles(this.files);
