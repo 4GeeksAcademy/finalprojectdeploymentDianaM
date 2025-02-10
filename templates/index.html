@@ -1,0 +1,72 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bread Classifier App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Bread Classifier App</h1>
+        <div class="layout">
+            <div class="image-and-buttons">
+                <div class="image-container">
+                    <img id="currentImage" src="{{ url_for('static', filename='placeholder.jpg') }}" alt="Upload an image">
+                </div>
+                <div class="button-container">
+                    <input type="file" id="fileInput" accept="image/*" style="display: none;">
+                    <button class="action-button yes" onclick="document.getElementById('fileInput').click()">Upload Image</button>
+                    <button class="action-button pastry" onclick="classifyImage()">Classify</button>
+                </div>
+            </div>
+            <div class="tagging-container">
+                <h3>Classification Result</h3>
+                <p id="result"></p>
+            </div>
+        </div>
+    </div>
+    <script>
+        function classifyImage() {
+            const fileInput = document.getElementById('fileInput');
+            const file = fileInput.files[0];
+            if (!file) {
+                alert('Please upload an image first.');
+                return;
+            }
+            
+            const formData = new FormData();
+            formData.append('file', file);
+            
+            fetch('/', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    document.getElementById('result').textContent = data.error;
+                } else {
+                    document.getElementById('result').textContent = data.result;
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('result').textContent = 'An error occurred during classification.';
+            });
+        }
+        
+        document.getElementById('fileInput').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('currentImage').src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+</body>
+</html>

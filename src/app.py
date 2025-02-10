@@ -1,4 +1,85 @@
-from utils import db_connect
-engine = db_connect()
 
-# your code here
+import os
+from flask import Flask, render_template, request, jsonify
+from PIL import Image
+import torch
+from transformers import CLIPProcessor, CLIPModel
+import io
+import numpy as np
+
+
+
+app = Flask(__name__)
+
+# Set confidence threshold for classification
+CONFIDENCE_THRESHOLD = 0.50
+
+def load_model():
+    try:
+        # Load CLIP model and processor
+        model = CLIPModel.from_pretrained("openai/clip-vit-base-patch32")
+        processor = CLIPProcessor.from_pretrained("openai/clip-vit-base-patch32")
+        
+        # Load learned prompts
+        learned_prompts = torch.load("models/learned_prompts.pt", map_location=torch.device('cpu'))
+        
+        return model, processor, learned_prompts
+    except Exception as e:
+        print(f"Failed to load model components: {e}")
+        return None, None, None
+
+model, processor, learned_prompts = load_model()
+
+def classify_image(image, model, processor, learned_prompts):
+    try:
+        # Preprocess the image
+        inputs = processor(images=image, return_tensors="pt", padding=True)
+        
+        # Get image features
+        with torch.no_grad():
+            image_features = model.get_image_features(**inputs)
+        
+        # Compute similarities
+        similarities = torch.matmul(image_features, learned_prompts.t())
+        probabilities = torch.nn.functional.softmax(similarities, dim=1)
+        
+        confidence, class_id = torch.max(probabilities, dim=1)
+        confidence = confidence.item()
+        class_id = class_id.item()
+
+        if confidence > CONFIDENCE_THRESHOLD:
+            if class_id == 0:
+                result = f"Cool! I'm pretty sure (confidence {confidence * 100:.2f}%) this is bread"
+            else:
+                result = f"This image doesn't appear to be bread (confidence: {confidence * 100:.2f}%)"
+        else:
+            result = f"I'm not confident enough to classify this image (confidence: {confidence * 100:.2f}%)"
+
+        return result
+    except Exception as e:
+        return f"Error during classification: {str(e)}"
+
+@app.route('/', methods=['GET', 'POST'])
+def index():
+    if request.method == 'POST':
+        if 'file' not in request.files:
+            return jsonify({'error': 'No file part'})
+        file = request.files['file']
+        if file.filename == '':
+            return jsonify({'error': 'No selected file'})
+        if file:
+            # Read the file into bytes
+            image_bytes = file.read()
+            
+            # Open the image using PIL
+            image = Image.open(io.BytesIO(image_bytes)).convert("RGB")
+            
+            if model and processor and learned_prompts is not None:
+                result = classify_image(image, model, processor, learned_prompts)
+                return jsonify({'result': result})
+            else:
+                return jsonify({'error': 'Failed to load model.'})
+    return render_template('index.html')
+
+if __name__ == '__main__':
+    app.run(debug=True)
