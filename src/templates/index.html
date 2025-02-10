@@ -12,8 +12,8 @@
         <h5 class="subtitle">Upload an image and make me guess if it is bread or not :D</h5>
         <div class="layout">
             <div class="image-and-buttons">
-                <div id="drop-area" class="image-container">
-                    <p>Drag and drop an image here or click to upload</p>
+                <div id="drop-area" class="image-container" onclick="document.getElementById('fileInput').click()">
+                    <p>Drag and drop an image here or click to upload it</p>
                     <input type="file" id="fileInput" accept="image/*" style="display: none;">
                 </div>
                 <div class="button-container">
@@ -26,6 +26,7 @@
                 <p id="result"></p>
             </div>
         </div>
+        
     </div>
     <script>
         const dropArea = document.getElementById('drop-area');
