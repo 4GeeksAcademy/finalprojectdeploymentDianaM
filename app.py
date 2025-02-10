@@ -41,7 +41,7 @@ try:
 
             if confidence > CONFIDENCE_THRESHOLD:
                 if class_id == 0:
-                    result = f"Cool! I'm pretty sure (confidence {confidence * 100:.2f}%) this is bread"
+                    result = f"Cool! I'm pretty sure this is bread (confidence {confidence * 100:.2f}%)"
                 else:
                     result = f"This image doesn't appear bread to me (confidence: {confidence * 100:.2f}%)"
             else:
@@ -76,7 +76,6 @@ def index():
             else:
                 return jsonify({'error': 'Model not available. Please check server logs.'})
     return render_template('index.html')
-
 if __name__ == '__main__':
     app.run(debug=False, host='0.0.0.0', port=int(os.environ.get('PORT', 8080)))
 
