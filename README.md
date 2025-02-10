@@ -12,14 +12,16 @@ Starting by bread, we have trained a first version of the model aimed at disting
 
 ## Global Ppoject Structure
 
-# Image classification Flask App deployed using a temporary port url set up as public because of incompatibilities with Torch & Transformers libraries and Render that didn't allow to deploy the app using a permanent url
+* Image classification Flask App deployed using a temporary port url set up as public because of incompatibilities with Torch & Transformers libraries and Render that didn't allow to deploy the app using a permanent url
 * [Github Repository (/images folder ignored because it surpases github repo max storage with +20.000 images)](https://github.com/dianamonroe/pretrainfoodclassificationwidget)
 * [Temporary public bread classification and taggin app (for chefs)](https://5000-dianamonroe-pretrainfoo-2w8tlujr98p.ws-eu117.gitpod.io/)
-![Alt text](src/static/4Geek Final Project Deployment - OPEN AI CLIP MODEL - Bread - not bread Classifier.png)
+
+![Alt text](src/static/OPENAICLIPdeploymentmodelapp.png)
+
+* [Yolon9.pt public Streamlit App](https://gourmetfoodclassifierv12.streamlit.app/) - Previously trained model (good metrics but failed badly in single image predictions)
 
 
-
-# Current repos¡itory -bread - not bread classifier model- structure (using the same system - Flask app deployed in a temporary port url because of Torch and Transformers non compatibility with Rendr)
+* Current repos¡itory -bread - not bread classifier model- structure (using the same system - Flask app deployed in a temporary port url because of Torch and Transformers non compatibility with Rendr)
 
 The project is organized as follows:
 
