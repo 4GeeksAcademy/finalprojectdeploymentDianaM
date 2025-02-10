@@ -1,6 +1,11 @@
-# Data Science Project Boilerplate
+# Bread Classifier App 
 
-This boilerplate is designed to kickstart data science projects by providing a basic setup for database connections, data processing, and machine learning model development. It includes a structured folder organization for your datasets and a set of pre-defined Python packages necessary for most data science tasks.
+This is the beta version of an application latelly aimed at curating good food -gourmet level- just by analyzing and classifying visual objective features of food images of public profiles of restaurants, bars and bakeries in Google maps, Instagram, Pinterest, etc. 
+
+Since each type of food has its own set of visual objective feautures when distinguishing if it is gourmer level good or not, the roadmap of the training will be developed start by the most popular food types in a city, starting by Barcelona. And within each food class, at least in the first food classes to be analyzed, there is a first filter of the model trained for distinguishing if the image belongs or not to the type of food class to be further classified as good gourmet level or not.
+
+Starting by bread, we have trained a first version of the model to distinguishing what is bread or not. After + 10 trainning rounds epochs (+500 epochs) training Ultralytics Yolon9.pt model pre-traiend with LVIS dataset (where bread is a class and there are + 18 not bread pastry classes) with pretty good numerical metrics (MMMMETRICAS), but failing badly in the single image test prediction ([1st Yolon9.pt model converted to onnx in order to be deployed in a public STREAMLIT app](https://gourmetfoodclassifierv12.streamlit.app/)), we have trained OPEN AI CLIP model using 2 class prompts with quite better metrics in just the 1s training round (EVALUACIÓN Y METRICASSSS CLIP)
+
 
 ## Structure
 
