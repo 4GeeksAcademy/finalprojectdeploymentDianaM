@@ -1,4 +1,3 @@
-
 import os
 from flask import Flask, render_template, request, jsonify
 from PIL import Image
@@ -6,13 +5,14 @@ import torch
 from transformers import CLIPProcessor, CLIPModel
 import io
 import numpy as np
+from dotenv import load_dotenv
 
-
+load_dotenv()  # Load environment variables from .env file
 
 app = Flask(__name__)
 
 # Set confidence threshold for classification
-CONFIDENCE_THRESHOLD = 0.25
+CONFIDENCE_THRESHOLD = float(os.getenv('CONFIDENCE_THRESHOLD', '0.25'))
 
 def load_model():
     try:
@@ -21,7 +21,7 @@ def load_model():
         processor = CLIPProcessor.from_pretrained("openai/clip-vit-base-patch32")
         
         # Load learned prompts
-        learned_prompts = torch.load("src/models/learned_prompts.pt", map_location=torch.device('cpu'))
+        learned_prompts = torch.load(os.getenv('LEARNED_PROMPTS_PATH', 'src/models/learned_prompts.pt'), map_location=torch.device('cpu'))
         
         return model, processor, learned_prompts
     except Exception as e:
@@ -82,4 +82,5 @@ def index():
     return render_template('index.html')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False, host='0.0.0.0', port=int(os.environ.get('PORT', 8080)))
+

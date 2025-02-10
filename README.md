@@ -1,10 +1,12 @@
 # Bread Classifier App 
 
-This is the beta version of an application latelly aimed at curating good food -gourmet level- just by analyzing and classifying visual objective features of food images of public profiles of restaurants, bars and bakeries in Google maps, Instagram, Pinterest, etc. 
+This is the beta version of an application latelly aimed at discovering places where to eat great food (foody level) just by analyzing and classifying visual objective features of food images of public profiles of restaurants, bars and bakeries in Google maps, Instagram, Pinterest, etc. 
 
-Since each type of food has its own set of visual objective feautures when distinguishing if it is gourmer level good or not, the roadmap of the training will be developed start by the most popular food types in a city, starting by Barcelona. And within each food class, at least in the first food classes to be analyzed, there is a first filter of the model trained for distinguishing if the image belongs or not to the type of food class to be further classified as good gourmet level or not.
+Since each type of food has its own set of objective visual feautures when distinguishing if it is "foody-good" level or rather mediocre, the roadmap of the model training will be divided by food classes, starting by the most popular food types in a city such as Barcelona. 
 
-Starting by bread, we have trained a first version of the model to distinguishing what is bread or not. After + 10 trainning rounds epochs (+500 epochs) training Ultralytics Yolon9.pt model pre-traiend with LVIS dataset (where bread is a class and there are + 18 not bread pastry classes) with pretty good numerical metrics (MMMMETRICAS), but failing badly in the single image test prediction ([1st Yolon9.pt model converted to onnx in order to be deployed in a public STREAMLIT app](https://gourmetfoodclassifierv12.streamlit.app/)), we have trained OPEN AI CLIP model using 2 class prompts with quite better metrics in just the 1s training round (EVALUACIÓN Y METRICASSSS CLIP)
+Within each food class (at least in the first food classes to be analyzed-deployed until the model can infere food classes based on collected visual knowledge of the initial food classes learned), we plan to develope a first filter of the model trained at distinguishing if the image belongs or not to the food class itself, before further classifying as "foody-good" level or not.
+
+Starting by bread, we have trained a first version of the model aimed at distinguishing what is bread of what is not. After + 10 trainning rounds epochs (+500 epochs) training Ultralytics Yolon9.pt model pre-traiend with LVIS dataset (where bread is a class and there are + 18 not bread pastry classes) with pretty good numerical metrics (MMMMETRICAS), but failing badly in the single image test prediction ([1st Yolon9.pt model converted to onnx in order to be deployed in a public STREAMLIT app](https://gourmetfoodclassifierv12.streamlit.app/)), we have trained OPEN AI CLIP model using 2 class prompts with quite better metrics in just the 1s training round (EVALUACIÓN Y METRICASSSS CLIP)
 
 
 ## Structure

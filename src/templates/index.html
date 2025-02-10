@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,27 +9,87 @@
 <body>
     <div class="container">
         <h1>Bread Classifier App</h1>
-        <h5>Upload an image and make me guess if it is bread or not :D</h5>
+        <h5 class="subtitle">Upload an image and make me guess if it is bread or not :D</h5>
         <div class="layout">
             <div class="image-and-buttons">
-                <div class="image-container">
-                    <img id="currentImage" src="{{ url_for('static', filename='placeholder.jpg') }}" alt="Upload an image">
+                <div id="drop-area" class="image-container">
+                    <p>Drag and drop an image here or click to upload</p>
+                    <input type="file" id="fileInput" accept="image/*" style="display: none;">
                 </div>
                 <div class="button-container">
-                    <input type="file" id="fileInput" accept="image/*" style="display: none;">
                     <button class="action-button yes" onclick="document.getElementById('fileInput').click()">Upload Image</button>
                     <button class="action-button pastry" onclick="classifyImage()">Classify</button>
                 </div>
             </div>
-            <div class="tagging-container">
+            <div class="tagging-container" style="display: none;">
                 <h3>Classification Result</h3>
                 <p id="result"></p>
             </div>
         </div>
     </div>
     <script>
+        const dropArea = document.getElementById('drop-area');
+        const fileInput = document.getElementById('fileInput');
+        const taggingContainer = document.querySelector('.tagging-container');
+
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            dropArea.addEventListener(eventName, preventDefaults, false);
+        });
+
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+
+        ['dragenter', 'dragover'].forEach(eventName => {
+            dropArea.addEventListener(eventName, highlight, false);
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+            dropArea.addEventListener(eventName, unhighlight, false);
+        });
+
+        function highlight(e) {
+            dropArea.classList.add('highlight');
+        }
+
+        function unhighlight(e) {
+            dropArea.classList.remove('highlight');
+        }
+
+        dropArea.addEventListener('drop', handleDrop, false);
+
+        function handleDrop(e) {
+            const dt = e.dataTransfer;
+            const files = dt.files;
+            handleFiles(files);
+        }
+
+        function handleFiles(files) {
+            if (files.length) {
+                const file = files[0];
+                displayImage(file);
+                fileInput.files = files;
+            }
+        }
+
+        function displayImage(file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = document.createElement('img');
+                img.src = e.target.result;
+                img.id = 'currentImage';
+                dropArea.innerHTML = '';
+                dropArea.appendChild(img);
+            }
+            reader.readAsDataURL(file);
+        }
+
+        fileInput.addEventListener('change', function(e) {
+            handleFiles(this.files);
+        });
+
         function classifyImage() {
-            const fileInput = document.getElementById('fileInput');
             const file = fileInput.files[0];
             if (!file) {
                 alert('Please upload an image first.');
@@ -51,23 +110,15 @@
                 } else {
                     document.getElementById('result').textContent = data.result;
                 }
+                taggingContainer.style.display = 'block';
             })
             .catch(error => {
                 console.error('Error:', error);
                 document.getElementById('result').textContent = 'An error occurred during classification.';
+                taggingContainer.style.display = 'block';
             });
         }
-        
-        document.getElementById('fileInput').addEventListener('change', function(event) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    document.getElementById('currentImage').src = e.target.result;
-                };
-                reader.readAsDataURL(file);
-            }
-        });
     </script>
 </body>
 </html>
+
