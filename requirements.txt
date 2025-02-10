@@ -9,6 +9,7 @@ transformers
 torchvision
 opencv-python-headless
 numpy
+requests
 pandas
 python-dotenv
 requests

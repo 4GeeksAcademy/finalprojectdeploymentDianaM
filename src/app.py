@@ -12,7 +12,7 @@ import numpy as np
 app = Flask(__name__)
 
 # Set confidence threshold for classification
-CONFIDENCE_THRESHOLD = 0.50
+CONFIDENCE_THRESHOLD = 0.25
 
 def load_model():
     try:
@@ -21,7 +21,7 @@ def load_model():
         processor = CLIPProcessor.from_pretrained("openai/clip-vit-base-patch32")
         
         # Load learned prompts
-        learned_prompts = torch.load("models/learned_prompts.pt", map_location=torch.device('cpu'))
+        learned_prompts = torch.load("src/models/learned_prompts.pt", map_location=torch.device('cpu'))
         
         return model, processor, learned_prompts
     except Exception as e:
@@ -51,7 +51,7 @@ def classify_image(image, model, processor, learned_prompts):
             if class_id == 0:
                 result = f"Cool! I'm pretty sure (confidence {confidence * 100:.2f}%) this is bread"
             else:
-                result = f"This image doesn't appear to be bread (confidence: {confidence * 100:.2f}%)"
+                result = f"This image doesn't appear bread to me (confidence: {confidence * 100:.2f}%)"
         else:
             result = f"I'm not confident enough to classify this image (confidence: {confidence * 100:.2f}%)"
 
