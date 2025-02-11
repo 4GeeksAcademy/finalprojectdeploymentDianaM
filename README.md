@@ -1,6 +1,6 @@
 # Bread Classifier App 
 
-This is the beta version of an application further aimed at curating places where to eat great food (foody level) just by analyzing and classifying visual objective features of food images from public profiles of restaurants, bars and bakeries in Google Maps, Instagram, Pinterest, etc. 
+This is the beta version of an application further aimed at **curating places where to eat great (foody-level) food just by analyzing and classifying visual objective features of food photos scrapped from public profiles of restaurants, bars and bakeries in Google Maps, Instagram, Pinterest, etc. 
 
 Since each type of food has its own set of objective visual feautures when distinguishing if it is "foody-good" level or rather mediocre, the roadmap of the model training will be deployed by **vertical food types**, assessing and starting by the most popular food types in a main foodie cities worldwide (i.e. sushi, pizza, paella, tacos, etc.). 
 
@@ -27,20 +27,35 @@ This labelling process was simplyfied by
   - a) refining the dataset taking only to images where the bread and not_bread object was prominent (taking 80% of the image) and located in the center (.txt files with coinciding file name that the .jpg file contents "1 0.5 0.5 0.8 0.8", where "1" standas for the not_bread class, 0.5 and 0.5 points to a a center object location and 0.8 0.8 the prominence of the object in the image)
   - b) and reducing primarly the not_bread class images to mainly pastry-related not_bread food and other not_bread no pastry-related objects similar to bread.
 
-After 3rd training round Yolo showed outstanding numerical metrics above 90% (overall and pre class)
+After the 3rd training round, Yolo seemed to perform greatly showing outstanding numerical metrics nearly 95% for all -overall and pre class-
 
 ![Alt text](static/Yolo113rdTrainingRoundMetrics.png)
 
 
-
-it failed consistently in single image prediction test (even also after several intents of data refinement until a 10th training round).
+But unfortunatelly, Yolo trained model failed consistently in single image prediction test loading best weights from the trainning (even also after several intents of data refinement an until a 10th training round).
 * [Repository of this 1st Yolon1.pt model converted to onnx in order to be deployed in a public STREAMLIT app](https://github.com/dianamonroe/gourmetfoodclassifierv1.2)).
 * [Yolo11n.pt public Streamlit App](https://gourmetfoodclassifierv12.streamlit.app/)
 * It for instance classifies a lemon as bread with a 40% confindence.
 
 ![Alt text](static/YoloBadPredictionTest.png)
 
-Since clearly Yolo11n.pt wasn't performing well in the single image test prediction, we had to switch to another model and trained OPEN AI CLIP model using 2 class prompts with quite better metrics in just the 1s training round (EVALUACIÓN Y METRICASSSS CLIP)
+Since clearly Yolo11n.pt wasn't performing well in the single image test prediction, we had to switch to another model and trained OPEN AI CLIP model using 2 class prompts with quite better metrics in just the 1s training round.
+Although numerical metrics of Yolo where way better thant OPEN AI CLIP:
+* **CLIP 1st training round:**
+  * Best Epoch: 50
+  * Accuracy: 0.90
+  * Precision: 0.95
+  * Recall: 0.83
+![Alt text](static/CLIP\1st\Training\Round\Confusion\Matrix.png)
+
+* **CLIP 2nd trainig round:**
+  * Best Epoch: 10
+  * Accuracy: 0.86
+  * Precision: 0.84
+  * Recall: 0.89
+![Alt text](static/CLIP\2nd\Training\Round\Confusion\Matrix.png)
+
+
 * Current repository - bread-not bread classifier model-structure (using the same system than for the pre-train classification app for chefs - Flask app deployed in a temporary port url because of Torch and Transformers non compatibility with Render)
 
 ![Alt text](src/static/OPENAICLIPdeploymentmodelapp.png)
