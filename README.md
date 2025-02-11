@@ -46,14 +46,15 @@ Although numerical metrics of Yolo where way better thant OPEN AI CLIP:
   * Accuracy: 0.90
   * Precision: 0.95
   * Recall: 0.83
-![Alt text](static/CLIP\1st\Training\Round\Confusion\Matrix.png)
+
+![Alt text](static/CLIP1stTrainingRoundConfusionMatrix.png)
 
 * **CLIP 2nd trainig round:**
   * Best Epoch: 10
   * Accuracy: 0.86
   * Precision: 0.84
   * Recall: 0.89
-![Alt text](static/CLIP\2nd\Training\Round\Confusion\Matrix.png)
+![Alt text](static/CLIP2ndTrainingRoundConfusionMatrix.png)
 
 
 * Current repository - bread-not bread classifier model-structure (using the same system than for the pre-train classification app for chefs - Flask app deployed in a temporary port url because of Torch and Transformers non compatibility with Render)
