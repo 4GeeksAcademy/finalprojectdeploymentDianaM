@@ -1,24 +1,31 @@
 # Bread Classifier App 
 
-This is the beta version of an application latelly aimed at discovering places where to eat great food (foody level) just by analyzing and classifying visual objective features of food images of public profiles of restaurants, bars and bakeries in Google maps, Instagram, Pinterest, etc. 
+This is the beta version of an application further aimed at curating places where to eat great food (foody level) just by analyzing and classifying visual objective features of food images from public profiles of restaurants, bars and bakeries in Google Maps, Instagram, Pinterest, etc. 
 
-Since each type of food has its own set of objective visual feautures when distinguishing if it is "foody-good" level or rather mediocre, the roadmap of the model training will be divided by food classes, starting by the most popular food types in a city such as Barcelona. 
+Since each type of food has its own set of objective visual feautures when distinguishing if it is "foody-good" level or rather mediocre, the roadmap of the model training will be deployed by **vertical food types**, assessing and starting by the most popular food types in a main foodie cities worldwide (i.e. sushi, pizza, paella, tacos, etc.). 
 
-Within each food class (at least in the first food classes to be analyzed-deployed until the model can infere food classes based on collected visual knowledge of the initial food classes learned), we plan to develope a first filter of the model trained at distinguishing if the image belongs or not to the food class itself, before further classifying as "foody-good" level or not.
+The visual characteristics of each vertical or food type are being carefully identified, typified and latelly embbeded to classified food images using tag-based prompts, by a pool of selected well-known gastronomers and chefs in each city.
 
-Starting by bread, we have trained a first version of the model aimed at distinguishing what is bread of what is not. After + 10 trainning rounds epochs (+500 epochs) training Ultralytics Yolon9.pt model pre-traiend with LVIS dataset (where bread is a class and there are + 18 not bread pastry classes) with pretty good numerical metrics (MMMMETRICAS), but failing badly in the single image test prediction ([1st Yolon9.pt model converted to onnx in order to be deployed in a public STREAMLIT app](https://gourmetfoodclassifierv12.streamlit.app/)), we have trained OPEN AI CLIP model using 2 class prompts with quite better metrics in just the 1s training round (EVALUACIÓN Y METRICASSSS CLIP)
+Within each food type and potentially for the first 5-10 food types to be analyzed-deployed until the model can infere food classes based on its collected visual knowledge from learning about enough previous food classes, we plan to develope a first filter of the model trained at distinguishing if the image belongs or not to the food type itself, before further classifying it as "foody-good" level or not.
+
+We will start by the city of Barcelona and the food type "bread", taking in this case as a reference for the bread foody-level class, the objective visual features of a bread with a certain % of sourdoug (90% or more). In order to make super easy and fast for gastronomers to classify and tag images of bread =>90% sourdough bread or below, we have created a tinder-like app for chefs leveredging the gamification capabilities of this UI for chefs to be able to classify and tag images as though if they were playing cards (o looking for its half orange :D)
+
+* Image classification Flask App deployed using a temporary port url set up as public because of A) incompatibilities with Torch & Transformers libraries and Render that didn't allow to deploy the app using a permanent url and B) High difficulty of setting up the Auth2 level process of Google Cloud Console to connect the Github Repository with the Drive Folders where the data is.
+* [Github Repository (/images folder ignored because it surpases github repo max storage with +20.000 images)](https://github.com/dianamonroe/pretrainfoodclassificationwidget)
+
+As mentioned, before training the model for its final goal (distinguishing foody-level class bread from bread than doesn't reach this food-level class), we have trained a first version of the model aimed at distinguishing what is bread of what is not. After + 10 trainning rounds epochs (+500 epochs) training **[Ultralytics Yolon11.pt model](https://docs.ultralytics.com/models/yolo11/#key-features)** pre-traiend with **[LVIS dataset](https://docs.ultralytics.com/datasets/detect/lvis/)** where bread is a class and there are + 18 not bread pastry classes) with pretty good numerical metrics (MMMMETRICAS), but failing badly in the single image test prediction ([1st Yolon9.pt model converted to onnx in order to be deployed in a public STREAMLIT app](https://gourmetfoodclassifierv12.streamlit.app/)), we have trained OPEN AI CLIP model using 2 class prompts with quite better metrics in just the 1s training round (EVALUACIÓN Y METRICASSSS CLIP)
 
 ![Alt text](src/static/gourmetfoodclassifierv12.png)
 
 ## Global Ppoject Structure
 
-* Image classification Flask App deployed using a temporary port url set up as public because of incompatibilities with Torch & Transformers libraries and Render that didn't allow to deploy the app using a permanent url
-* [Github Repository (/images folder ignored because it surpases github repo max storage with +20.000 images)](https://github.com/dianamonroe/pretrainfoodclassificationwidget)
 * [Temporary public bread classification and taggin app (for chefs)](https://5000-dianamonroe-pretrainfoo-2w8tlujr98p.ws-eu117.gitpod.io/)
 
 ![Alt text](src/static/OPENAICLIPdeploymentmodelapp.png)
 
-* [Yolon9.pt public Streamlit App](https://gourmetfoodclassifierv12.streamlit.app/) - Previously trained model (good metrics but failed badly in single image predictions)
+* [Yolon9.pt public Streamlit App](https://gourmetfoodclassifierv12.streamlit.app/) - Previously trained model (good metrics but failed badly in single image predictions). It classifies a lemon as bread with a 40% confindence.
+
+![Alt text](static/YoloBadPredictionTest.png)
 
 
 * Current repos¡itory -bread - not bread classifier model- structure (using the same system - Flask app deployed in a temporary port url because of Torch and Transformers non compatibility with Rendr)
