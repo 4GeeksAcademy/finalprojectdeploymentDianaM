@@ -24,7 +24,7 @@ As mentioned above, before training the model for its final goal (distinguishing
 by + 10 rounds epochs (+500 epochs) training the **[Ultralytics Yolon11.pt model](https://docs.ultralytics.com/models/yolo11/#key-features)** pre-traiend with **[LVIS dataset](https://docs.ultralytics.com/datasets/detect/lvis/)** where bread is a class and there are + 18 not bread pastry classes. 
 In order to do so, the data set had to be standarized to 640x640 pixels x 3 channels (RGB) and the Yolo labels including class and bounding boxes (location of the object in the image).
 This labelling process was simplyfied by 
-  - a) refining the dataset taking only to images where the bread and not_bread object was prominent (taking 80% of the image) and located in the center (bounding box 0.8 0.8 0.5 0.5)
+  - a) refining the dataset taking only to images where the bread and not_bread object was prominent (taking 80% of the image) and located in the center (.txt files with coinciding file name that the .jpg file contents "1 0.5 0.5 0.8 0.8", where "1" standas for the not_bread class, 0.5 and 0.5 points to a a center object location and 0.8 0.8 the prominence of the object in the image)
   - b) and reducing primarly the not_bread class images to mainly pastry-related not_bread food and other not_bread no pastry-related objects similar to bread.
 
 While we obtained pretty good numerical metrics above 80% from 1st trainning rounds and above 90% for the last ones, Yolon11 model fails badly in the single image test prediction.
