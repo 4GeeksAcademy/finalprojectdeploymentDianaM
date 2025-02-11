@@ -27,7 +27,13 @@ This labelling process was simplyfied by
   - a) refining the dataset taking only to images where the bread and not_bread object was prominent (taking 80% of the image) and located in the center (.txt files with coinciding file name that the .jpg file contents "1 0.5 0.5 0.8 0.8", where "1" standas for the not_bread class, 0.5 and 0.5 points to a a center object location and 0.8 0.8 the prominence of the object in the image)
   - b) and reducing primarly the not_bread class images to mainly pastry-related not_bread food and other not_bread no pastry-related objects similar to bread.
 
-While we obtained pretty good numerical metrics above 80% from 1st trainning rounds and above 90% for the last ones, Yolon11 model fails badly in the single image test prediction.
+After 3rd training round Yolo showed outstanding numerical metrics above 90% (overall and pre class)
+
+![Alt text](static/Yolo113rdTrainingRoundMetrics.png)
+
+
+
+it failed consistently in single image prediction test (even also after several intents of data refinement until a 10th training round).
 * [Repository of this 1st Yolon1.pt model converted to onnx in order to be deployed in a public STREAMLIT app](https://github.com/dianamonroe/gourmetfoodclassifierv1.2)).
 * [Yolo11n.pt public Streamlit App](https://gourmetfoodclassifierv12.streamlit.app/)
 * It for instance classifies a lemon as bread with a 40% confindence.
