@@ -16,6 +16,7 @@ In order to make super easy and fast to classify and tag images of bread =>90% s
  
  ![Alt text](src/static/EatBlindlyRoadmap.jpg)
 
+* [Eat Blindy Front end mock up](https://eatblindly.my.canva.site/)
 
 <br>
 
