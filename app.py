@@ -10,7 +10,7 @@ load_dotenv()
 app = Flask(__name__)
 
 # Set confidence threshold for classification
-CONFIDENCE_THRESHOLD = float(os.getenv('CONFIDENCE_THRESHOLD', '0.25'))
+CONFIDENCE_THRESHOLD = float(os.getenv('CONFIDENCE_THRESHOLD', '0.69'))
 
 try:
     import torch
@@ -43,9 +43,9 @@ try:
                 if class_id == 0:
                     result = f"Cool! I'm pretty sure this is bread (confidence {confidence * 100:.2f}%)"
                 else:
-                    result = f"This image doesn't appear bread to me (confidence: {confidence * 100:.2f}%)"
+                    result = f"I'm quite sure this image is not bread (confidence: {confidence * 100:.2f}%)"
             else:
-                result = f"I'm not confident enough to classify this image (confidence: {confidence * 100:.2f}%)"
+                result = f"I'm not confident enough how to classify this image (confidence: {confidence * 100:.2f}%)"
 
             return result
         except Exception as e:

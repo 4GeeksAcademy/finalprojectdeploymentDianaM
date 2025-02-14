@@ -68,5 +68,7 @@ You can request access to a bunch of repositories mainly done in Google Colab wh
 * 1. [Image Scrapping](https://drive.google.com/drive/folders/1w28M03pW-V66UihSKkf1pyW0xMzToP8E?usp=drive_link)
 * 2. [Data Preparation, Standardization, Augmentation & Refinement](https://drive.google.com/drive/folders/1ztH7bXBSfOYk5NEBFg91tBL2P8DUVCQw?usp=sharing)
 * 3. [Model Training, Evaluation & Deployment](https://drive.google.com/drive/folders/1eLGwQrhMVTj-36B4KAG4cDRBVylq2vQS?usp=drive_link)
-
+ 
+ Request acces to Yolo1 training rounds & evaluation
+ [Request access to OPEN AI CLIP training rounds & evaluation](https://drive.google.com/file/d/1p9N38zwv3FTrn41g7O1fBrD4ZUZRVwMb/view?usp=drive_link)
     
