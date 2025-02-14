@@ -16,7 +16,7 @@ In order to make super easy and fast to classify and tag images of bread =>90% s
 
 ## **Summary of steps and milestones achieve done so far:**
 
-* 1. **Bread tagging and classification App** Flask app deployed using a temporary port url set up as public because of: 
+* **Bread tagging and classification App** Flask app deployed using a temporary port url set up as public because of: 
   * A) Incompatibilities with Torch & Transformers libraries and Render that didn't allow to deploy the app using a permanent url 
   * B) High difficulty of setting up the Auth2 level process of Google Cloud Console to connect the Github Repository with the Drive Folders where the data is.
     * [Github Repository (/images folder ignored because it surpases github repo max storage with +20.000 images)](https://github.com/dianamonroe/pretrainfoodclassificationwidget)
@@ -83,7 +83,7 @@ Although numerical metrics of Yolo where way better thant OPEN AI CLIP, CLIP per
 
 <br>
    
-# **REQUEST ACCESS TO THE DATA PROCESSING AND TRAINING PROJECT REPOSITORIES:**
+## **REQUEST ACCESS TO THE DATA PROCESSING AND TRAINING PROJECT REPOSITORIES:**
 You can request access to a bunch of repositories mainly done in Google Colab where the different phases of the project have been developed in the following Google Drive Folders:
 
 * 1. [Image Scrapping](https://drive.google.com/drive/folders/1w28M03pW-V66UihSKkf1pyW0xMzToP8E?usp=drive_link)
