@@ -12,6 +12,12 @@ We plan to deploy a 1st version of the app in the city of Barcelona and with the
 
 In order to make super easy and fast to classify and tag images of bread =>90% sourdough bread or below, we have created a tinder-like app leveredging the gamification capabilities of this UI for chefs to be able to classify and tag images as though if they were playing cards (o looking for their other half :D).
 
+For more information about Eat Blindly app and its roadmap:
+ * [You can find a brief presentation pitch of the project here](https://drive.google.com/file/d/1WVHgsrFUt8kqF7vE2oddmj6azsL3wrED/view?usp=sharing)
+ 
+ ![Alt text](src/static/gourmetfoodclassifierv12.png)
+
+
 <br>
 
 ## **Summary of steps and milestones achieved so far:**
@@ -22,7 +28,7 @@ In order to make super easy and fast to classify and tag images of bread =>90% s
     * [Github Repository (/images folder ignored because it surpases github repo max storage with +20.000 images)](https://github.com/dianamonroe/pretrainfoodclassificationwidget)
     * CODESPACE NEEDS T BE ACTIVE FOR THE APP TO BE EXECTUED: [Temporary public bread classification and tagging app for chefs](https://5000-dianamonroe-pretrainfoo-2w8tlujr98p.ws-eu117.gitpod.io/)
 
-  ![Alt text](src/static/gourmetfoodclassifierv12.png)
+  ![Alt text](src/static/EatBlindlyRoadmap.jpg)
 
 <br>
 
