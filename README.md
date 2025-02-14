@@ -14,9 +14,13 @@ In order to make super easy and fast to classify and tag images of bread =>90% s
 
 * [Eat Blindly pitch and roadmap:](https://drive.google.com/file/d/1WVHgsrFUt8kqF7vE2oddmj6azsL3wrED/view?usp=sharing)
   
+  ![Alt text](src/static/EatBlindlyRoadmap.jpg)
+  
 * [Eat Blindy Front end mock up](https://eatblindly.my.canva.site/)
+
+  ![Alt text](src/static/EatBlindlyMockUp.jpg)
  
- ![Alt text](src/static/EatBlindlyRoadmap.jpg)(https://eatblindly.my.canva.site/)
+ 
 
 
 
