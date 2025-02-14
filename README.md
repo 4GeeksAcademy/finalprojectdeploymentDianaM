@@ -104,6 +104,12 @@ Although Yolo showed way better numerical metrics of than OPEN AI CLIP, **CLIP p
 
   ![Alt text](src/static/OPENAICLIPdeploymentmodelapp.png)
 
+  ![Alt text](src/static/CLIPbread_notbreadclassifier_correctnotbreadclassification.png)
+
+  ![Alt text](src/static/CLIPbread_notbreadclassifier_correctnotbreadclassification.png)
+  
+  ![Alt text](src/static/CLIPbread_notbreadclassifier_notenoughconfindence.png) 
+
 <br>
    
 ## **REQUEST ACCESS TO THE DATA PROCESSING AND TRAINING PROJECT REPOSITORIES:**
