@@ -14,7 +14,7 @@ In order to make super easy and fast to classify and tag images of bread =>90% s
 
 <br>
 
-## **Summary of steps and milestones achieve done so far:**
+## **Summary of steps and milestones achieved so far:**
 
 * **Bread tagging and classification App** Flask app deployed using a temporary port url set up as public because of: 
   * A) Incompatibilities with Torch & Transformers libraries and Render that didn't allow to deploy the app using a permanent url 
@@ -29,7 +29,7 @@ In order to make super easy and fast to classify and tag images of bread =>90% s
 * **Training models**
 As mentioned above, before training the model to accomplish its final goal (distinguishing foody-level class bread from bread than doesn't reach this food-level class), we have initially trained the 1st layer of the model aimed at distinguishing what is bread of what is not as follows:
 
-   * **YOLO** - 10 Training rounds epochs (+500 epochs) of the Yolo model (Yolo8n.pt and Yolo11n.pt): **[Ultralytics Yolon11.pt model](https://docs.ultralytics.com/models/yolo11/#key-features)**, pre-traiend with **[LVIS dataset](https://docs.ultralytics.com/datasets/detect/lvis/)** where bread is a class and there are + 18 not bread pastry classes.
+   * **YOLO MODEL** - 10 Training rounds epochs (+500 epochs) of the Yolo model (Yolo8n.pt and Yolo11n.pt): **[Ultralytics Yolon11.pt model](https://docs.ultralytics.com/models/yolo11/#key-features)**, pre-traiend with **[LVIS dataset](https://docs.ultralytics.com/datasets/detect/lvis/)** where bread is a class and there are + 18 not bread pastry classes.
    * YOLO was our 1st choice initially because:
      * It is the latest iteration in the Ultralytics YOLO series of real-time object detectors, cutting-edge accuracy, speed, and efficiency.
      * Counts with rnhanced Feature Extraction: improved backbone and neck architecture, which enhances feature extraction capabilities for more precise object detection and complex
@@ -49,8 +49,8 @@ As mentioned above, before training the model to accomplish its final goal (dist
 
 ![Alt text](static/Yolo113rdTrainingRoundMetrics.png)
 
-   Finally and unfortunatelly, despite the great numerical metrics obtained with the validation set, Yolo model failed consistently in single image prediction test loading best weights 
-   from the trainning (even also after several intents of data refinement an until a 10th training round).
+   Finally and unfortunatelly, despite the great numerical metrics obtained with the validation set, Yolo model failed consistently in single image prediction test loading best 
+   weights from the trainning (even also after several intents of data refinement an until a 10th training round).
    
    * **YOLO MODEL DEPLOYMENT -FAILS IN SINGLE IMAGE PREDICTION-:**
      * [Yolo11n.pt public Streamlit App](https://gourmetfoodclassifierv12.streamlit.app/)
@@ -61,7 +61,7 @@ As mentioned above, before training the model to accomplish its final goal (dist
 
 <br>
 
- * **OPEN AI CLLIP (Contrastive Language-Image Pre-training) MODEL** -  [Learning Transferable Visual Models From Natural Language Supervision](https://arxiv.org/abs/2103.00020) - [Vision Transformer Base Batch 32](https://huggingface.co/docs/transformers/model_doc/vit) Since clearly Yolo11n.pt wasn't performing well in the single image test prediction and thus for our main business purpose (Restoration business discovery based on food product single image analysis and classification), we decide to switch to another LLM model and we trained OPEN AI CLIP model using 2 class prompts with quite better metrics in just the 1s training round.
+ * **OPEN AI CLIP (Contrastive Language-Image Pre-training) MODEL** -  [Learning Transferable Visual Models From Natural Language Supervision](https://arxiv.org/abs/2103.00020) - [Vision Transformer Base Batch 32](https://huggingface.co/docs/transformers/model_doc/vit) Since clearly Yolo11n.pt wasn't performing well in the single image test prediction and thus for our main business purpose (Restoration business discovery based on food product single image analysis and classification), we decide to switch to another LLM model and we trained OPEN AI CLIP model using 2 class prompts with quite better metrics in just the 1s training round.
  * **WHY DID WE SWITCHED TO CLIP?** 
  * **ZERO-SHORT SUPER POWERS:** REALLY GOOD at differentiating objects it hadn't been trained to classify. This is, to correctly classify croissants as "not bread" and bagels as
  "bread" even though it hasn't “seen” those specific types before. This is exactly the capability we need for the 1st level of distinction (does the image belongs to the desired food 
