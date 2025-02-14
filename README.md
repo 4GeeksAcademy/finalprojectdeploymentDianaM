@@ -1,6 +1,11 @@
-# Eat Blindly v.1 ("Bread-Not bread" Classifier App)
+# Eat Blindly
 
-This is the beta version of an application further aimed at **curating places where to eat foody-level food** leverdaged by a model trained for analyzing and classifying visual objective features of food photos scrapped from public profiles of restaurants, bars and bakeries in Google Maps, Instagram, Pinterest, etc. 
+  ![Alt text](src/static/EatBlindlyv.1PitchCover.jpg)
+
+
+## **Eat Blindly v.1 ("Bread-Not bread" Classifier App)**
+
+This is the beta version of an application further aimed at **curating places where to eat chef-level food** leverdaged by a model trained for analyzing and classifying visual objective features of food photos scrapped from public profiles of restaurants, bars and bakeries in Google Maps, Instagram, Pinterest, etc. 
 
 Since each type of food has its own set of objective visual feautures when distinguishing if it is "foody-good" level or rather mediocre, the roadmap of the model training will be deployed over time by **vertical food types**, starting by the most popular food types in a main foodie cities worldwide (i.e. bread, sushi, pizza, paella, tacos, etc.). 
 
