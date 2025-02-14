@@ -15,7 +15,7 @@ In order to make super easy and fast to classify and tag images of bread =>90% s
 For more information about Eat Blindly app and its roadmap:
  * [You can find a brief presentation pitch of the project here](https://drive.google.com/file/d/1WVHgsrFUt8kqF7vE2oddmj6azsL3wrED/view?usp=sharing)
  
- ![Alt text](src/static/gourmetfoodclassifierv12.png)
+ ![Alt text](src/static/EatBlindlyRoadmap.jpg)
 
 
 <br>
