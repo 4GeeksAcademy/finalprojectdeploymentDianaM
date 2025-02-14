@@ -12,8 +12,7 @@ We plan to deploy a 1st version of the app in the city of Barcelona and with the
 
 In order to make super easy and fast to classify and tag images of bread =>90% sourdough bread or below, we have created a tinder-like app leveredging the gamification capabilities of this UI for chefs to be able to classify and tag images as though if they were playing cards (o looking for their other half :D).
 
-For more information about Eat Blindly app and its roadmap:
- * [You can find a brief presentation pitch of the project here](https://drive.google.com/file/d/1WVHgsrFUt8kqF7vE2oddmj6azsL3wrED/view?usp=sharing)
+* [Eat Blindly pitch and roadmap:](https://drive.google.com/file/d/1WVHgsrFUt8kqF7vE2oddmj6azsL3wrED/view?usp=sharing)
  
  ![Alt text](src/static/EatBlindlyRoadmap.jpg)
 
